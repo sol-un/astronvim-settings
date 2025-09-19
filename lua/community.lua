@@ -18,4 +18,14 @@ return {
   -- Utils
   { import = "astrocommunity.editing-support.auto-save-nvim" },
   { import = "astrocommunity.file-explorer.mini-files" },
+  { import = "astrocommunity.test.neotest" },
+
+  -- Languages
+  { import = "astrocommunity.pack.html-css" },
+  { import = "astrocommunity.pack.eslint" },
+  { import = "astrocommunity.pack.prettier" },
+  { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.pack.cs" },
+  { import = "astrocommunity.pack.markdown" },
+  { import = "astrocommunity.pack.json" },
 }
