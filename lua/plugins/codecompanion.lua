@@ -38,7 +38,7 @@ return {
         history = {
           enabled = true,
           opts = {
-            keymap = "<leader>ah",
+            keymap = "<Leader>ah",
             auto_save = true,
             expiration_days = 0,
             picker = "snacks",
@@ -51,26 +51,26 @@ return {
         },
       },
     },
-    keys = {
-      { "<leader>a", mode = { "n" }, desc = "CodeCompanion AI" },
-      { "<leader>ac", mode = { "n" }, "<cmd>CodeCompanionChat<cr>i", desc = "Start a chat" },
-      {
-        "<leader>ae",
-        mode = { "n" },
-        "<cmd>CodeCompanionChat<cr>i@editor #buffer{watch} ",
-        desc = "Edit current buffer",
-      },
-      { "<leader>ap", mode = { "n" }, "<cmd>CodeCompanionActions<cr>", desc = "Action palette..." },
-      { "<leader>ac", mode = { "v" }, "<cmd>CodeCompanionChat Add<cr>i", desc = "Paste selection into chat" },
-      { "<leader>ah", mode = { "n" }, "<cmd>CodeCompanionHistory<cr>", desc = "Chat history..." },
-    },
   },
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
+    "AstroNvim/astrocore",
+    ---@type AstroCoreOpts
     opts = {
-      spec = {
-        { { "<leader>a", icon = "" } },
+      mappings = {
+        n = {
+          ["<Leader>a"] = { desc = " AI" },
+          ["<Leader>ac"] = { "<Cmd>CodeCompanionChat<cr>i", desc = "Start a chat" },
+          ["<Leader>ae"] = {
+
+            "<Cmd>CodeCompanionChat<cr>i@editor #buffer{watch} ",
+            desc = "Edit current buffer",
+          },
+          ["<Leader>ap"] = { "<Cmd>CodeCompanionActions<cr>", desc = "Action palette..." },
+          ["<Leader>ah"] = { "<Cmd>CodeCompanionHistory<cr>", desc = "Chat history..." },
+        },
+        v = {
+          ["<Leader>ac"] = { "<Cmd>CodeCompanionChat Add<cr>i", desc = "Paste selection into chat" },
+        },
       },
     },
   },

@@ -8,7 +8,6 @@ return {
     },
     cmd = "Neogit",
     branch = "master",
-    keys = { { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" } },
     opts = {
       kind = "split",
       graph_style = "unicode",
@@ -81,6 +80,22 @@ return {
         },
       },
     },
-    keys = { { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview Open" } },
+  },
+  {
+    "AstroNvim/astrocore",
+    opts = {
+      mappings = {
+        n = {
+          ["<Leader>gd"] = false,
+          ["<Leader>gg"] = { "<cmd>Neogit<cr>", desc = "Neogit" },
+        },
+      },
+    },
+  },
+  {
+    "AstroNvim/astrolsp",
+    opts = { mappings = { n = {
+      ["<Leader>gd"] = { "<cmd>DiffviewOpen<cr>", desc = "Diffview Open" },
+    } } },
   },
 }
