@@ -56,7 +56,6 @@ return {
       -- first key is the mode
       n = {
         -- second key is the lefthand side of the map
-
         -- navigate buffer tabs
         ["L"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["H"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
@@ -73,24 +72,75 @@ return {
           end,
           desc = "Close buffer from tabline",
         },
-        ["C-/"] = {
-          function() vim.notify "i am cuckold" end,
-          desc = "Toggle terminal",
-        },
-
-        ["<A-k>"] = { ":m .-2<CR>==", desc = "Move up" },
-        ["<A-j>"] = { ":m .+1<CR>==", desc = "Move down" },
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+        ["<Leader>tt"] = {
+          function() vim.notify(vim.inspect(require("astrocore.rooter").detect(0, false))) end,
+          -- function() require("snacks").terminal(nil, { cwd = require("astrocore.rooter").info() }) end,
+          desc = "Toggle terminal",
+        },
+
+        -- move lines
+        ["<A-k>"] = { ":m .-2<CR>==", desc = "Move up" },
+        ["<A-j>"] = { ":m .+1<CR>==", desc = "Move down" },
+
+        -- tabs
+        ["<Leader><Tab>"] = { desc = "Tabs" },
+        ["<Leader><Tab>o"] = { "<cmd>tabonly<cr>", desc = "Close Other Tabs" },
+        ["<Leader><Tab><Tab>"] = { "<cmd>tabnew<cr>", desc = "New Tab" },
+        ["<Leader><Tab>d"] = { "<cmd>tabclose<cr>", desc = "Close Tab" },
+        ["gt"] = { "<cmd>tabnext<cr>", desc = "Next Tab" },
+        ["gT"] = { "<cmd>tabprevious<cr>", desc = "Previous Tab" },
+
+        -- resize window using <ctrl> arrow keys
+        ["<C-Up>"] = { "<cmd>resize +2<cr>", desc = "Increase Window Height" },
+        ["<C-Down>"] = { "<cmd>resize -2<cr>", desc = "Decrease Window Height" },
+        ["<C-Left>"] = { "<cmd>vertical resize -2<cr>", desc = "Decrease Window Width" },
+        ["<C-Right>"] = { "<cmd>vertical resize +2<cr>", desc = "Increase Window Width" },
+
+        --splits
+        ["<Leader>b\\"] = false,
+        ["<Leader>bh"] = { "<cmd>split<cr>",  desc = "Horizontal split" },
+        ["<Leader>bH"] = {
+          function()
+            require("astroui.status.heirline").buffer_picker(function(bufnr)
+              vim.cmd.split()
+              vim.api.nvim_win_set_buf(0, bufnr)
+            end)
+          end,
+          desc = "Horizontal split buffer from tabline",
+        },
+        ["<Leader>b|"] = false,
+        ["<Leader>bv"] = { "<cmd>vsplit<cr>", desc = "Vertical split" },
+        ["<Leader>bV"] = {
+          function()
+            require("astroui.status.heirline").buffer_picker(function(bufnr)
+              vim.cmd.vsplit()
+              vim.api.nvim_win_set_buf(0, bufnr)
+            end)
+          end,
+          desc = "Vertical split buffer from tabline",
+        },
       },
       i = {
+        -- save
+        ["<C-s>"] = {
+          "<Cmd>:w<CR><Esc>",
+        },
+
+        -- move lines
         ["<A-k>"] = { "<esc>:m .-2<CR>==gi", desc = "Move up" },
         ["<A-j>"] = { "<esc>:m .+1<CR>==gi", desc = "Move down" },
       },
       v = {
+        -- move lines
         ["<A-j>"] = { ":m '>+1<CR>gv=gv", desc = "Move up" },
         ["<A-k>"] = { ":m '<-2<CR>gv=gv", desc = "Move down" },
+
+        -- better indenting
+        ["<"] = { "<gv" },
+        [">"] = { ">gv" },
       },
     },
   },
