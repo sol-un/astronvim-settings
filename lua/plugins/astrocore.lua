@@ -101,7 +101,7 @@ return {
 
         --splits
         ["<Leader>b\\"] = false,
-        ["<Leader>bh"] = { "<cmd>split<cr>",  desc = "Horizontal split" },
+        ["<Leader>bh"] = { "<cmd>split<cr>", desc = "Horizontal split" },
         ["<Leader>bH"] = {
           function()
             require("astroui.status.heirline").buffer_picker(function(bufnr)
@@ -122,6 +122,14 @@ return {
           end,
           desc = "Vertical split buffer from tabline",
         },
+
+        ["gd"] = {
+          function() require("snacks").picker.lsp_definitions() end,
+          desc = "Goto Definition",
+        },
+        ["gr"] = { function() require("snacks.nvim").picker.lsp_references() end, desc = "References" },
+        ["gI"] = { function() require("snacks.nvim").picker.lsp_implementations() end, desc = "Goto Implementation" },
+        ["gy"] = { function() require("snacks.nvim").picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
       },
       i = {
         -- save
