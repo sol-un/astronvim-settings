@@ -93,11 +93,29 @@ return {
         spell = false, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = false, -- sets vim.opt.wrap
+        spelllang = { "en", "ru" },
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
         -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
         -- This can be found in the `lua/lazy_setup.lua` file
+
+        clipboard = function()
+          if vim.fn.has "wsl" then
+            return {
+              name = "win32yank-wsl",
+              copy = {
+                ["+"] = "win32yank.exe -i --crlf",
+                ["*"] = "win32yank.exe -i --crlf",
+              },
+              paste = {
+                ["+"] = "win32yank.exe -o --lf",
+                ["*"] = "win32yank.exe -o --lf",
+              },
+              cache_enabled = true,
+            }
+          end
+        end,
       },
     },
     -- Mappings can be configured through AstroCore as well.
