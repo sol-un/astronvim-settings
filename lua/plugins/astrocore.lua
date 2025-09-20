@@ -3,9 +3,6 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
-KILL = nil
-IS_FOCUSED = true
-
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
@@ -21,53 +18,6 @@ return {
       notifications = true, -- enable notifications at start
     },
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
-    autocmds = {
-      neogit = {
-        {
-          desc = "Update buffers on Neogit events",
-          event = "User",
-          pattern = { "NeogitBranchCheckout", "NeogitPullComplete" },
-          callback = function() vim.cmd "set autoread | checktime" end,
-        },
-        {
-          desc = "Rebuild postavki backend on branch checkout",
-          event = "User",
-          pattern = { "NeogitBranchCheckout" },
-          callback = function()
-            if string.find(vim.fn.getcwd(), "postavki") == nil then return end
-
-            if KILL ~= nil then KILL() end
-
-            vim.notify "Start rebuilding postavki backend"
-
-            local process = vim.system({ "rebuildAll.cmd" }, nil, function(result)
-              KILL = nil
-
-              if result.code ~= 0 then
-                vim.notify("Error rebuilding postavki backend\n\n" .. result.stderr, vim.log.levels.ERROR)
-                return
-              end
-
-              vim.notify "Done rebuilding postavki backend"
-            end)
-
-            KILL = process.kill
-          end,
-        },
-      },
-      focus = {
-        {
-          desc = "Store focused state",
-          event = "FocusGained",
-          callback = function() IS_FOCUSED = true end,
-        },
-        {
-          desc = "Store blurred state",
-          event = "FocusLost",
-          callback = function() IS_FOCUSED = false end,
-        },
-      },
-    },
     -- passed to `vim.filetype.add`
     filetypes = {
       -- see `:h vim.filetype.add` for usage
@@ -95,23 +45,6 @@ return {
         -- configure global vim variables (vim.g)
         -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
         -- This can be found in the `lua/lazy_setup.lua` file
-
-        clipboard = function()
-          if vim.fn.has "wsl" then
-            return {
-              name = "win32yank-wsl",
-              copy = {
-                ["+"] = "win32yank.exe -i --crlf",
-                ["*"] = "win32yank.exe -i --crlf",
-              },
-              paste = {
-                ["+"] = "win32yank.exe -o --lf",
-                ["*"] = "win32yank.exe -o --lf",
-              },
-              cache_enabled = true,
-            }
-          end
-        end,
       },
     },
     -- Mappings can be configured through AstroCore as well.

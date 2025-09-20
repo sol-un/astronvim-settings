@@ -1,5 +1,3 @@
-local IS_FOCUSED = require("./astrocore").IS_FOCUSED
-
 return {
   {
     "TaDaa/vimade",
@@ -12,7 +10,7 @@ return {
       blocklist = {
         -- As long as the editor is focused, never fade windows in a tab that has a DiffviewFiles type buffer, as defined by the sindrets/diffview.nvim plugin
         diffview_tab = function()
-          if not IS_FOCUSED then return false end
+          if not require("plugins.autocmds").IS_FOCUSED then return false end
 
           for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
             local buf = vim.api.nvim_win_get_buf(win)
