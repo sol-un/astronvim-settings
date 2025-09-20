@@ -7,6 +7,7 @@ return {
   "AstroNvim/astrocommunity",
   -- UI
   { import = "astrocommunity.colorscheme.tokyonight-nvim" },
+  { import = "astrocommunity.recipes.cache-colorscheme" },
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.scrolling.mini-animate" },
   { import = "astrocommunity.recipes.diagnostic-virtual-lines-current-line" },
