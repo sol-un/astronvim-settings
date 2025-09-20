@@ -9,6 +9,7 @@ return {
   { import = "astrocommunity.colorscheme.tokyonight-nvim" },
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.scrolling.mini-animate" },
+  { import = "astrocommunity.recipes.diagnostic-virtual-lines-current-line" },
 
   -- Motion
   { import = "astrocommunity.motion.flash-nvim" },
