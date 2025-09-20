@@ -1,11 +1,4 @@
-IS_FOCUSED = true
-
-vim.api.nvim_create_autocmd("FocusGained", {
-  callback = function() IS_FOCUSED = true end,
-})
-vim.api.nvim_create_autocmd("FocusLost", {
-  callback = function() IS_FOCUSED = false end,
-})
+local IS_FOCUSED = require("./astrocore").IS_FOCUSED
 
 return {
   {
