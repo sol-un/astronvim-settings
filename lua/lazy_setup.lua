@@ -16,6 +16,10 @@ require("lazy").setup({
 } --[[@as LazySpec]], {
   -- Configure any other `lazy.nvim` configuration options here
   install = { colorscheme = { "astrotheme", "habamax" } },
+  checker = {
+    enabled = true, -- check for plugin updates periodically
+    notify = true, -- notify on update
+  }, -- automatically check for plugin updates
   ui = { backdrop = 100 },
   performance = {
     rtp = {
