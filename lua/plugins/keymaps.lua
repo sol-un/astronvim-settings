@@ -111,9 +111,13 @@ return {
           ["<leader>,"] = { function() Snacks.picker.buffers() end, desc = "Buffers" },
 
           -- terminal
+          -- this is the same as Ctrl + /, see https://apple.stackexchange.com/questions/24261/how-do-i-send-c-that-is-control-slash-to-the-terminal
+          ["<C-_>"] = {
+            function() require("snacks").terminal(nil, { cwd = vim.uv.cwd() }) end,
+            desc = "Toggle terminal",
+          },
           ["<C-/>"] = {
-            function() vim.notify(vim.inspect(require("astrocore.rooter").detect(0, false))) end,
-            -- function() require("snacks").terminal(nil, { cwd = require("astrocore.rooter").info() }) end,
+            function() require("snacks").terminal(nil, { cwd = vim.uv.cwd() }) end,
             desc = "Toggle terminal",
           },
 
@@ -153,6 +157,11 @@ return {
           -- better indenting
           ["<"] = { "<gv" },
           [">"] = { ">gv" },
+        },
+        t = {
+          ["<C-/>"] = { "<cmd>close<cr>", desc = "Hide Terminal" },
+          ["<C-_>"] = { "<cmd>close<cr>", desc = "Hide Terminal" },
+          ["<C-h>"] = { "<Backspace>" },
         },
       },
     },
