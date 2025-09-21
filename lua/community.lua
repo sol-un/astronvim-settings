@@ -11,6 +11,7 @@ return {
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.scrolling.mini-animate" },
   { import = "astrocommunity.recipes.diagnostic-virtual-lines-current-line" },
+  { import = "astrocommunity.editing-support.nvim-treesitter-context" },
 
   -- Motion
   { import = "astrocommunity.motion.flash-nvim" },
