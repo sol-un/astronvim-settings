@@ -1,10 +1,7 @@
 -- These are better off using Snacks.picker
-vim.keymap.del({ "n", "x" }, "gra")
-vim.keymap.del("n", "grt")
-vim.keymap.del("n", "grn")
-vim.keymap.del("n", "grr")
-vim.keymap.del("n", "gri")
-vim.keymap.del("n", "gO")
+for _, lhs in ipairs { "gra", "grt", "n", "grn", "grr", "gri", "gO" } do
+  pcall(vim.keymap.del, { "n", "x" }, lhs)
+end
 
 ---@type LazySpec
 return {
