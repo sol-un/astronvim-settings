@@ -179,6 +179,12 @@ return {
             function() require("snacks").picker.lsp_type_definitions() end,
             desc = "Goto T[y]pe Definition",
           },
+
+          -- search
+          ["<Leader>lG"] = {
+            function() require("snacks").picker.lsp_workspace_symbols { filter = { markdown = false, help = false } } end,
+            desc = "LSP Workspace Symbols",
+          },
         },
       },
     },
