@@ -4,10 +4,7 @@ return {
     local status = require "astroui.status"
     opts.statusline = {
       hl = { fg = "fg", bg = "bg" },
-      status.component.mode {
-        mode_text = { padding = { left = 1, right = 1 } },
-      },
-      status.component.git_branch(),
+      status.component.git_branch { padding = { left = 1 } },
       {
         status.component.builder {
           { provider = require("astroui").get_icon "FolderClosed" },
@@ -34,8 +31,7 @@ return {
       status.component.fill(),
       status.component.lsp(),
       status.component.virtual_env(),
-      status.component.treesitter(),
-      status.component.nav(),
+      status.component.nav { percentage = false, scrollbar = false, padding = { right = 1 } },
     }
   end,
 }
