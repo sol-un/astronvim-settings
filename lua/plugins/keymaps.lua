@@ -105,7 +105,7 @@ return {
             end,
             desc = "Vertical split buffer from tabline",
           },
-          ["<leader>,"] = { function() Snacks.picker.buffers() end, desc = "Buffers" },
+          ["<leader>,"] = { function() require("snacks").picker.buffers() end, desc = "Buffers" },
 
           -- terminal
           -- this is the same as Ctrl + /, see https://apple.stackexchange.com/questions/24261/how-do-i-send-c-that-is-control-slash-to-the-terminal
@@ -134,6 +134,33 @@ return {
           ["<Leader>gF"] = {
             "<cmd>DiffviewFileHistory<cr>",
             desc = "Git commit history (repository)",
+          },
+          ["<Leader>gm"] = {
+            function()
+              local paths_to_open = ""
+              local commit_hash_to_open = ""
+
+              if vim.bo.filetype == "NeogitCommitView" then
+                local first_line = unpack(vim.api.nvim_buf_get_lines(0, 0, 1, true))
+                local _, commit_hash = unpack(vim.split(first_line, " "))
+
+                commit_hash_to_open = commit_hash
+                paths_to_open =
+                  vim.fn.system(string.format("git diff-tree --no-commit-id --name-only %s -r", commit_hash))
+              else
+                paths_to_open = vim.fn.system "git diff --name-only"
+              end
+
+              if paths_to_open == "" then
+                vim.notify "No modified files"
+              else
+                local message = commit_hash_to_open == "" and "Opened currently modified files"
+                  or string.format("Opened files modified in commit %s", commit_hash_to_open)
+                vim.cmd(string.format(":args %s", paths_to_open:gsub("[\n\r]", " ")))
+                vim.notify(message)
+              end
+            end,
+            desc = "Open modified files",
           },
 
           -- file explorer
