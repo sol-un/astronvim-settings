@@ -26,10 +26,6 @@ return {
           ["<Leader>Q"] = false,
           ["<Leader>qq"] = { "<Cmd>confirm qall<CR>", desc = "Exit AstroNvim" },
 
-          -- move lines
-          ["<A-k>"] = { "<cmd>m .-2<CR>==", desc = "Move up" },
-          ["<A-j>"] = { "<cmd>m .+1<CR>==", desc = "Move down" },
-
           -- tabs
           ["<Leader><Tab>"] = { desc = "Tabs" },
           ["<Leader><Tab>o"] = { "<cmd>tabonly<cr>", desc = "Close Other Tabs" },
@@ -182,16 +178,8 @@ return {
           ["<C-s>"] = {
             "<Cmd>w<CR><Esc>",
           },
-
-          -- move lines
-          ["<A-k>"] = { "<esc><cmd>m .-2<CR>==gi", desc = "Move up" },
-          ["<A-j>"] = { "<esc><cmd>m .+1<CR>==gi", desc = "Move down" },
         },
         v = {
-          -- move lines
-          ["<A-j>"] = { "<cmd>m '>+1<CR>gv=gv", desc = "Move up" },
-          ["<A-k>"] = { "<cmd>m '<-2<CR>gv=gv", desc = "Move down" },
-
           -- better indenting
           ["<"] = { "<gv" },
           [">"] = { ">gv" },
