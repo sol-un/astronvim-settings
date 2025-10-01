@@ -12,6 +12,7 @@ return {
   { import = "astrocommunity.scrolling.mini-animate" },
   { import = "astrocommunity.recipes.diagnostic-virtual-lines-current-line" },
   { import = "astrocommunity.editing-support.nvim-treesitter-context" },
+  { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
 
   -- Motion
   { import = "astrocommunity.motion.flash-nvim" },
