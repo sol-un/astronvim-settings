@@ -57,6 +57,7 @@ return {
             end,
             desc = "Select window",
           },
+
           -- buffers
           ["L"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
           ["H"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
@@ -172,6 +173,11 @@ return {
             end,
             desc = "Explorer (CWD)",
           },
+
+          -- save
+          ["<C-s>"] = {
+            "<Cmd>w<CR><Esc>",
+          },
         },
         i = {
           -- save
@@ -188,6 +194,18 @@ return {
           ["<C-/>"] = { "<cmd>close<cr>", desc = "Hide Terminal" },
           ["<C-_>"] = { "<cmd>close<cr>", desc = "Hide Terminal" },
           ["<C-h>"] = { "<Backspace>" },
+        },
+        s = {
+          -- save
+          ["<C-s>"] = {
+            "<Cmd>w<CR><Esc>",
+          },
+        },
+        x = {
+          -- save
+          ["<C-s>"] = {
+            "<Cmd>w<CR><Esc>",
+          },
         },
       },
     },
