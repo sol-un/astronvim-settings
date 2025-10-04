@@ -3,7 +3,7 @@ local get_session_name = function()
   local name = vim.fn.getcwd()
   local branch = vim.fn.system "git branch --show-current"
   if vim.v.shell_error == 0 then
-    return name .. vim.trim(branch --[[@as string]])
+    return name .. "_" .. vim.trim(branch --[[@as string]])
   else
     return name
   end
