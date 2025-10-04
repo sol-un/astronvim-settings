@@ -26,6 +26,7 @@ return {
   { import = "astrocommunity.file-explorer.mini-files" },
   { import = "astrocommunity.test.neotest" },
   { import = "astrocommunity.editing-support.vim-move" },
+  { import = "astrocommunity.code-runner.overseer-nvim" },
 
   -- Languages
   { import = "astrocommunity.pack.html-css" },
