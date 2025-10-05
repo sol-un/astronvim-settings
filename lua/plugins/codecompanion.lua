@@ -7,7 +7,6 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "ravitemer/codecompanion-history.nvim",
     },
-    branch = "has-xml-tools",
     opts = {
       strategies = {
         chat = {
@@ -15,19 +14,21 @@ return {
         },
       },
       adapters = {
-        opts = { show_defaults = false },
-        openai_compatible = function()
-          return require("codecompanion.adapters").extend("openai_compatible", {
-            formatted_name = "Kontur AI",
-            env = {
-              url = "https://srs-litellm.kontur.host",
-              api_key = "KONTURAI_API_KEY",
-              models_endpoint = "/v1/models",
-              chat_url = "/v1/chat/completions",
-            },
-            schema = { model = { default = "preview-code-pro" } },
-          })
-        end,
+        http = {
+          openai_compatible = function()
+            return require("codecompanion.adapters").extend("openai_compatible", {
+              formatted_name = "Kontur AI",
+              opts = { tools = true },
+              env = {
+                url = "https://srs-litellm.kontur.host",
+                api_key = "KONTURAI_API_KEY",
+                models_endpoint = "/v1/models",
+                chat_url = "/v1/chat/completions",
+              },
+              schema = { model = { default = "preview-code-pro" } },
+            })
+          end,
+        },
       },
       display = {
         diff = {
@@ -62,7 +63,7 @@ return {
           ["<Leader>ac"] = { "<Cmd>CodeCompanionChat<cr>i", desc = "Start a chat" },
           ["<Leader>ae"] = {
 
-            "<Cmd>CodeCompanionChat<cr>i@editor #buffer{watch} ",
+            "<Cmd>CodeCompanionChat<cr>iUsing @{insert_edit_into_file} apply the following changes to the #{buffer}{watch}: ",
             desc = "Edit current buffer",
           },
           ["<Leader>ap"] = { "<Cmd>CodeCompanionActions<cr>", desc = "Action palette..." },
