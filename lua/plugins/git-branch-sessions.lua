@@ -43,6 +43,19 @@ return {
             end
           end),
         },
+        {
+          event = "VimEnter",
+          desc = "Save current session before loading the next one",
+          callback = function()
+            local resession = require "resession"
+            resession.add_hook("pre_load", function()
+              local info = resession.get_current_session_info()
+              if info == nil then return end
+
+              resession.save(info.name, { dir = info.dir, notify = false })
+            end)
+          end,
+        },
       },
     },
   },
