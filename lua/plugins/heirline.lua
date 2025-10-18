@@ -1,5 +1,16 @@
 return {
   "rebelot/heirline.nvim",
+  dependencies = {
+    {
+      "AstroNvim/astroui",
+
+      opts = {
+        icons = {
+          Clock = "",
+        },
+      },
+    },
+  },
   opts = function(_, opts)
     local status = require "astroui.status"
     opts.statusline = {
@@ -35,6 +46,31 @@ return {
       status.component.lsp(),
       status.component.virtual_env(),
       status.component.nav { percentage = false, scrollbar = false, padding = { right = 1 } },
+      status.component.builder {
+        {
+          provider = function()
+            local time = os.date "%H:%M"
+
+            ---@cast time string
+            return status.utils.stylize(time, {
+              icon = { kind = "Clock", padding = { left = 1, right = 1 } },
+              padding = { right = 1 },
+            })
+          end,
+        },
+        update = {
+          "User",
+          callback = vim.schedule_wrap(function(_, args)
+            if args.match == "UpdateTime" then vim.cmd.redrawstatus() end
+          end),
+        },
+      },
     }
+
+    vim.uv.new_timer():start(
+      (60 - tonumber(os.date "%S")) * 1000,
+      60000,
+      vim.schedule_wrap(function() vim.api.nvim_exec_autocmds("User", { pattern = "UpdateTime", modeline = false }) end)
+    )
   end,
 }
