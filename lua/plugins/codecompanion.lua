@@ -20,9 +20,8 @@ return {
               formatted_name = "Kontur AI",
               opts = { tools = true },
               env = {
-                url = "https://srs-litellm.kontur.host",
-                api_key = "KONTURAI_API_KEY",
-                models_endpoint = "/v1/models",
+                url = "OPENAI_HOST",
+                api_key = "OPENAI_API_KEY",
                 chat_url = "/v1/chat/completions",
               },
               schema = { model = { default = "preview-code-pro" } },
