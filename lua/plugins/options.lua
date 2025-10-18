@@ -11,7 +11,8 @@ return {
         spelllang = { "en", "ru" },
       },
       g = {
-        clipboard = vim.fn.has "wsl" and {
+        -- Setting up clipboard on WSL
+        clipboard = vim.fn.isdirectory "/mnt/c" == 1 and {
           name = "win32yank-wsl",
           copy = {
             ["+"] = "win32yank.exe -i --crlf",
