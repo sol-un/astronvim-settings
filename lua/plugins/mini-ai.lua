@@ -3,7 +3,7 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/util/mini.lua#L23
 
 return {
-  "echasnovski/mini.ai",
+  "nvim-mini/mini.ai",
   event = "VeryLazy",
   opts = function()
     local ai = require "mini.ai"
