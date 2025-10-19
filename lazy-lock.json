@@ -15,6 +15,7 @@
   "cmp-dap": { "branch": "master", "commit": "ea92773e84c0ad3288c3bc5e452ac91559669087" },
   "codecompanion-history.nvim": { "branch": "main", "commit": "eb99d256352144cf3b6a1c45608ec25544a0813d" },
   "codecompanion.nvim": { "branch": "main", "commit": "09e6a8f5576f0e68638c7730d21dcede9d43f372" },
+  "colorful-winsep.nvim": { "branch": "main", "commit": "e555611c8f39918e30d033a97ea1a5af457ce75e" },
   "csharpls-extended-lsp.nvim": { "branch": "master", "commit": "9cd24d7be42bd138f287baf6300a55d5797ab33e" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "flash.nvim": { "branch": "main", "commit": "2febce67ff9cf7638d2569d17c41af02c38401eb" },

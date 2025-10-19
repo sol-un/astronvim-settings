@@ -2,6 +2,7 @@ return {
   {
     "TaDaa/vimade",
     event = "VeryLazy",
+    enabled = false,
     opts = {
       recipe = { "default", { animate = true } },
       ncmode = "buffers",
@@ -22,18 +23,29 @@ return {
       },
     },
   },
+  -- {
+  --   "AstroNvim/astrocore",
+  --   ---@type AstroCoreOpts
+  --   opts = {
+  --     mappings = {
+  --       n = {
+  --         ["<Leader>uv"] = {
+  --           "<cmd>VimadeToggle<cr>",
+  --           desc = "Toggle vimade",
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   {
-    "AstroNvim/astrocore",
-    ---@type AstroCoreOpts
+    "nvim-zh/colorful-winsep.nvim",
+    event = "VeryLazy",
     opts = {
-      mappings = {
-        n = {
-          ["<Leader>uv"] = {
-            "<cmd>VimadeToggle<cr>",
-            desc = "Toggle vimade",
-          },
-        },
-      },
+      border = "rounded",
+      highlight = function()
+        local hl = vim.api.nvim_get_hl(0, { name = "FloatBorder" })
+        vim.api.nvim_set_hl(0, "ColorfulWinSep", { fg = hl.fg, bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg })
+      end,
     },
   },
 }
