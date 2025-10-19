@@ -12,7 +12,7 @@ return {
     rooter = {
       autochdir = true,
       notify = false,
-      ignore = { dirs = { "~/projects/postavki/Source/*" }, servers = {} },
+      ignore = { dirs = { "~/Projects/postavki/Source/*" }, servers = {} },
     },
     features = {
       large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
