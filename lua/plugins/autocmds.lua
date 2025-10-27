@@ -41,18 +41,6 @@ return {
           end,
         },
       },
-      focus = {
-        {
-          desc = "Store focused state",
-          event = "FocusGained",
-          callback = function() IS_FOCUSED = true end,
-        },
-        {
-          desc = "Store blurred state",
-          event = "FocusLost",
-          callback = function() IS_FOCUSED = false end,
-        },
-      },
     },
   },
 }
