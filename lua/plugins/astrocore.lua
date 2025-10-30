@@ -9,11 +9,7 @@ return {
   ---@type AstroCoreOpts
   opts = {
     -- Configure core features of AstroNvim
-    rooter = {
-      autochdir = true,
-      notify = false,
-      ignore = { dirs = { "~/Projects/postavki/Source/*" }, servers = {} },
-    },
+    
     features = {
       large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
