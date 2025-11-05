@@ -90,6 +90,16 @@ return {
           ["<Leader>gg"] = { "<cmd>Neogit<cr>", desc = "Neogit" },
         },
       },
+      autocmds = {
+        neogit = {
+          {
+            desc = "Update buffers on Neogit events",
+            event = "User",
+            pattern = { "NeogitBranchCheckout", "NeogitPullComplete" },
+            callback = function() vim.cmd "set autoread | checktime" end,
+          },
+        },
+      },
     },
   },
   {

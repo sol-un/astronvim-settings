@@ -10,12 +10,6 @@ return {
     autocmds = {
       neogit = {
         {
-          desc = "Update buffers on Neogit events",
-          event = "User",
-          pattern = { "NeogitBranchCheckout", "NeogitPullComplete" },
-          callback = function() vim.cmd "set autoread | checktime" end,
-        },
-        {
           desc = "Rebuild postavki backend on branch checkout",
           event = "User",
           pattern = { "NeogitBranchCheckout" },
