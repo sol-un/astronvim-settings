@@ -9,7 +9,6 @@ return {
   ---@type AstroCoreOpts
   opts = {
     -- Configure core features of AstroNvim
-    
     features = {
       large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
@@ -41,10 +40,27 @@ return {
         wrap = false, -- sets vim.opt.wrap
         spelllang = { "en", "ru" },
       },
+      o = {
+        shell = vim.uv.os_uname().sysname == "Windows_NT" and "powershell" or vim.o.shell,
+      },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
         -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
         -- This can be found in the `lua/lazy_setup.lua` file
+
+        -- Setting up clipboard on WSL
+        clipboard = vim.fn.isdirectory "/mnt/c" == 1 and {
+          name = "win32yank-wsl",
+          copy = {
+            ["+"] = "win32yank.exe -i --crlf",
+            ["*"] = "win32yank.exe -i --crlf",
+          },
+          paste = {
+            ["+"] = "win32yank.exe -o --lf",
+            ["*"] = "win32yank.exe -o --lf",
+          },
+          cache_enabled = true,
+        } or vim.g.clipboard,
       },
     },
     -- Mappings can be configured through AstroCore as well.
