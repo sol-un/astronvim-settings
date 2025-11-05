@@ -1,4 +1,3 @@
--- function for calculating the current session name
 local get_session_name = function()
   local name = vim.fn.getcwd()
   local name_normalized = string.gsub(name, "/", "󰿟")
@@ -12,77 +11,73 @@ local get_session_name = function()
   end
 end
 
+local CURRENT = nil
+
+local highlight_current = function(session)
+  if session ~= CURRENT then return session end
+
+  return " " .. session
+end
+
+---@param action "read"|"delete"
+local read_or_delete = function(action)
+  vim.ui.select(vim.tbl_keys(MiniSessions.detected), {
+    prompt = action:gsub("^%l", string.upper) .. " session",
+    format_item = highlight_current,
+  }, function(session)
+    if session then MiniSessions[action](session) end
+  end)
+end
+
 return {
-  -- replace w/ mini.sessions
-  { "resession.nvim", enabled = false },
-  { "nvim-mini/mini.sessions", opts = {} },
-  { "notjedi/nvim-rooter.lua", lazy = false, opts = {} },
+  { "stevearc/resession.nvim", enabled = false },
   {
     "AstroNvim/astrocore",
     ---@type AstroCoreOpts
     opts = {
       rooter = {
-        -- replace w/ nvim-rooter
         enabled = false,
       },
-      sessions = {
-        -- disable the auto-saving of directory sessions
-        autosave = { cwd = false },
-      },
-      mappings = {
-        n = {
-          ["<Leader>Sl"] = {
-            function()
-              local last_session = require("mini.sessions").get_latest()
-              require("mini.sessions").read(last_session)
-            end,
-            desc = "Last session",
-          },
-          ["<Leader>SD"] = {
-            function() require("mini.sessions").select "delete" end,
-            desc = "Delete session",
-          },
-          ["<Leader>SF"] = {
-            function() require("mini.sessions").select() end,
-            desc = "Select session",
-          },
-          -- update save dirsession mapping to get the correct session name
-          ["<Leader>SS"] = {
-            function() require("mini.sessions").write(get_session_name()) end,
-            desc = "Save this session",
-          },
+    },
+  },
+  { "notjedi/nvim-rooter.lua", lazy = false, opts = {} },
+  {
+    "nvim-mini/mini.sessions",
+    lazy = false,
+    opts = {
+      hooks = {
+        post = {
+          read = function(current)
+            CURRENT = current["name"]
+            vim.cmd ":Rooter"
+          end,
         },
       },
-      autocmds = {
-        git_branch_sessions = {
-          -- auto save directory sessions on leaving
-          {
-            event = "VimLeavePre",
-            desc = "Save git branch directory sessions on close",
-            callback = vim.schedule_wrap(function()
-              if require("astrocore.buffer").is_valid_session() then
-                require("mini.sessions").write(get_session_name())
-              else
-                vim.notify("Error saving session", vim.log.levels.ERROR)
-              end
-            end),
-          },
-          -- {
-          --   event = "User",
-          --   pattern = { "NeogitBranchCheckout" },
-          --   desc = "Switch session on neogit branch checkout",
-          --   callback = function(args)
-          --     local sessions = require("resession").list { dir = "dirsession" }
-          --     local branch_name_serialized = string.gsub(args.data.branch_name, "/", "_")
-          --
-          --     for _, session_name in ipairs(sessions) do
-          --       if string.match(session_name, branch_name_serialized) ~= nil then
-          --         require("resession").load(session_name, { dir = "dirsession", notify = true })
-          --       end
-          --     end
-          --   end,
-          -- },
-        },
+    },
+    keys = {
+      { "<Leader>S" },
+      {
+        "<Leader>Sl",
+        function()
+          local last_session = require("mini.sessions").get_latest()
+          require("mini.sessions").read(last_session)
+        end,
+        desc = "Last session",
+      },
+      {
+        "<Leader>SD",
+        function() read_or_delete "delete" end,
+        desc = "Delete session",
+      },
+      {
+        "<Leader>SF",
+        function() read_or_delete "read" end,
+        desc = "Select session",
+      },
+      {
+        "<Leader>SS",
+        function() require("mini.sessions").write(get_session_name()) end,
+        desc = "Save this session",
       },
     },
   },
