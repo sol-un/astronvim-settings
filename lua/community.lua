@@ -31,6 +31,7 @@ return {
   -- Languages
   { import = "astrocommunity.pack.html-css" },
   { import = "astrocommunity.pack.eslint" },
+  { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.prettier" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.cs" },
