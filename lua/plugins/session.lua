@@ -1,33 +1,4 @@
-local get_session_name = function()
-  local name = vim.fn.getcwd()
-  local name_normalized = string.gsub(name, "/", "󰿟")
-  local branch = vim.fn.system "git branch --show-current"
-
-  if vim.v.shell_error == 0 then
-    local branch_normalized = string.gsub(branch, "/", "󰿟")
-    return name_normalized .. " @ " .. vim.trim(branch_normalized --[[@as string]])
-  else
-    return name_normalized
-  end
-end
-
-local CURRENT = nil
-
-local highlight_current = function(session)
-  if session ~= CURRENT then return session end
-
-  return " " .. session
-end
-
----@param action "read"|"delete"
-local read_or_delete = function(action)
-  vim.ui.select(vim.tbl_keys(MiniSessions.detected), {
-    prompt = action:gsub("^%l", string.upper) .. " session",
-    format_item = highlight_current,
-  }, function(session)
-    if session then MiniSessions[action](session) end
-  end)
-end
+local utils = require "session-utils"
 
 return {
   { "stevearc/resession.nvim", enabled = false },
@@ -48,7 +19,7 @@ return {
       hooks = {
         post = {
           read = function(current)
-            CURRENT = current["name"]
+            utils.CURRENT = current["name"]
             vim.cmd ":Rooter"
           end,
         },
@@ -66,17 +37,17 @@ return {
       },
       {
         "<Leader>SD",
-        function() read_or_delete "delete" end,
+        function() utils.read_or_delete "delete" end,
         desc = "Delete session",
       },
       {
         "<Leader>SF",
-        function() read_or_delete "read" end,
+        function() utils.read_or_delete "read" end,
         desc = "Select session",
       },
       {
         "<Leader>SS",
-        function() require("mini.sessions").write(get_session_name()) end,
+        function() require("mini.sessions").write(utils.get_session_name()) end,
         desc = "Save this session",
       },
     },
