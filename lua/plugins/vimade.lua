@@ -2,7 +2,6 @@
 return {
   {
     "TaDaa/vimade",
-    event = "VeryLazy",
     opts = {
       recipe = { "default", { animate = true } },
       enablefocusfading = true,
