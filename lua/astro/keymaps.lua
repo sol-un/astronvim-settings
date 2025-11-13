@@ -160,20 +160,6 @@ return {
             desc = "Open modified files",
           },
 
-          -- file explorer
-          ["<Leader>e"] = {
-            function()
-              if not require("mini.files").close() then require("mini.files").open(vim.api.nvim_buf_get_name(0)) end
-            end,
-            desc = "Explorer",
-          },
-          ["<Leader>E"] = {
-            function()
-              if not require("mini.files").close() then require("mini.files").open(vim.uv.cwd()) end
-            end,
-            desc = "Explorer (CWD)",
-          },
-
           -- save
           ["<C-s>"] = {
             "<Cmd>w<CR><Esc>",
