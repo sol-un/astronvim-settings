@@ -27,6 +27,7 @@ return {
   { import = "astrocommunity.test.neotest" },
   { import = "astrocommunity.editing-support.vim-move" },
   { import = "astrocommunity.code-runner.overseer-nvim" },
+  { import = "astrocommunity.completion.blink-cmp-emoji" },
 
   -- Languages
   { import = "astrocommunity.pack.html-css" },

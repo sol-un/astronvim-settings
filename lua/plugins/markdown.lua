@@ -8,7 +8,8 @@ local keymaps_meta = {
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "codecompanion" },
+    opts = { file_types = { "markdown", "codecompanion", "gitlab" } },
+    ft = { "markdown", "codecompanion", "gitlab" },
     keys = function()
       local rmd = require "render-markdown"
       local set = require("snacks").keymap.set
