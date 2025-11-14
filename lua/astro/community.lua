@@ -28,6 +28,7 @@ return {
   { import = "astrocommunity.editing-support.vim-move" },
   { import = "astrocommunity.code-runner.overseer-nvim" },
   { import = "astrocommunity.completion.blink-cmp-emoji" },
+  { import = "astrocommunity.search.grug-far-nvim" },
 
   -- Languages
   { import = "astrocommunity.pack.html-css" },
