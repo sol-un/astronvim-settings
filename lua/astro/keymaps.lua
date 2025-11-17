@@ -11,18 +11,6 @@ return {
     opts = {
       mappings = {
         n = {
-          -- Remapped below to the "Windows" menu item
-          ["<Leader>w"] = false,
-        },
-      },
-    },
-  },
-  {
-    "AstroNvim/astrocore",
-    ---@type AstroCoreOpts
-    opts = {
-      mappings = {
-        n = {
           ["<Leader>Q"] = false,
           ["<Leader>qq"] = { "<Cmd>confirm qall<CR>", desc = "Exit AstroNvim" },
 
@@ -35,7 +23,7 @@ return {
           ["gT"] = { "<cmd>tabprevious<cr>", desc = "Previous Tab" },
 
           -- windows
-          ["<Leader>u"] = { desc = "󱋆 UI/UX" },
+          ["<Leader>u"] = { desc = "󱋆 UI/UX" }, -- changing icon for this keymap, the default is for windows keymaps
           ["<Leader>w"] = { desc = " Windows" },
           ["<Leader>q"] = false,
           ["<Leader>wv"] = { "<cmd>vsplit<cr>", desc = "Vertical split" },
@@ -115,51 +103,6 @@ return {
             desc = "Toggle terminal",
           },
 
-          -- git
-          ["<Leader>gT"] = false,
-          ["<Leader>go"] = false,
-          ["<Leader>gt"] = false,
-          ["<Leader>gc"] = false,
-          ["<Leader>gC"] = false,
-          ["<Leader>gb"] = { function() require("gitsigns").blame_line() end, desc = "Git blame line" },
-          ["<Leader>gB"] = { function() require("gitsigns").blame_line { full = true } end, desc = "Git blame file" },
-          ["<Leader>gz"] = { function() require("snacks").picker.git_stash() end, desc = "Git stash" },
-          ["<Leader>gf"] = {
-            "<cmd>DiffviewFileHistory %<cr>",
-            desc = "Git commit history (file)",
-          },
-          ["<Leader>gF"] = {
-            "<cmd>DiffviewFileHistory<cr>",
-            desc = "Git commit history (repository)",
-          },
-          ["<Leader>gm"] = {
-            function()
-              local paths_to_open = ""
-              local commit_hash_to_open = ""
-
-              if vim.bo.filetype == "NeogitCommitView" then
-                local first_line = unpack(vim.api.nvim_buf_get_lines(0, 0, 1, true))
-                local _, commit_hash = unpack(vim.split(first_line, " "))
-
-                commit_hash_to_open = commit_hash
-                paths_to_open =
-                  vim.fn.system(string.format("git diff-tree --no-commit-id --name-only %s -r", commit_hash))
-              else
-                paths_to_open = vim.fn.system "git diff --name-only"
-              end
-
-              if paths_to_open == "" then
-                vim.notify "No modified files"
-              else
-                local message = commit_hash_to_open == "" and "Opened currently modified files"
-                  or string.format("Opened files modified in commit %s", commit_hash_to_open)
-                vim.cmd(string.format(":args %s", paths_to_open:gsub("[\n\r]", " ")))
-                vim.notify(message)
-              end
-            end,
-            desc = "Open modified files",
-          },
-
           -- save
           ["<C-s>"] = {
             "<Cmd>w<CR><Esc>",
@@ -225,16 +168,6 @@ return {
             desc = "LSP Workspace Symbols",
           },
         },
-      },
-    },
-  },
-  {
-    "folke/which-key.nvim",
-    opts = {
-      spec = {
-        { mode = "n" },
-        { "<Leader>gl", function() end, hidden = true },
-        { "<Leader>gL", function() end, hidden = true },
       },
     },
   },
