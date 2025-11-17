@@ -23,7 +23,6 @@ return {
 
   -- Utils
   { import = "astrocommunity.editing-support.auto-save-nvim" },
-  { import = "astrocommunity.file-explorer.mini-files" },
   { import = "astrocommunity.test.neotest" },
   { import = "astrocommunity.editing-support.vim-move" },
   { import = "astrocommunity.code-runner.overseer-nvim" },
