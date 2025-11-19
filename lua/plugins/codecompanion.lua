@@ -10,7 +10,7 @@ return {
     opts = {
       strategies = {
         chat = {
-          adapter = "openai_compatible",
+          adapter = "opencode",
         },
       },
       adapters = {
@@ -22,9 +22,9 @@ return {
               env = {
                 url = "OPENAI_HOST",
                 api_key = "OPENAI_API_KEY",
-                chat_url = "/v1/chat/completions",
+                chat_url = "/chat/completions",
               },
-              schema = { model = { default = "preview-code-pro" } },
+              schema = { model = { default = "code-pro" } },
             })
           end,
         },
@@ -32,6 +32,10 @@ return {
       display = {
         diff = {
           enabled = false,
+        },
+        chat = {
+          fold_reasoning = true,
+          show_reasoning = false,
         },
       },
       extensions = {
@@ -47,6 +51,7 @@ return {
             delete_on_clearing_chat = false,
             dir_to_save = vim.fn.stdpath "data" .. "/codecompanion-history",
             enable_logging = false,
+            title_generation_opts = { adapter = "openai_compatible" },
           },
         },
       },
