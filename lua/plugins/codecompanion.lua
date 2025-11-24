@@ -14,7 +14,12 @@ return {
         },
       },
       adapters = {
+        acp = {
+          opts = { show_defaults = false },
+          opencode = function() return require "codecompanion.adapters.acp.opencode" end,
+        },
         http = {
+          opts = { show_defaults = false },
           openai_compatible = function()
             return require("codecompanion.adapters").extend("openai_compatible", {
               formatted_name = "Kontur AI",
@@ -30,9 +35,6 @@ return {
         },
       },
       display = {
-        diff = {
-          enabled = false,
-        },
         chat = {
           fold_reasoning = true,
           show_reasoning = false,
@@ -48,9 +50,7 @@ return {
             picker = "snacks",
             auto_generate_title = true,
             continue_last_chat = false,
-            delete_on_clearing_chat = false,
             dir_to_save = vim.fn.stdpath "data" .. "/codecompanion-history",
-            enable_logging = false,
             title_generation_opts = { adapter = "openai_compatible" },
           },
         },
