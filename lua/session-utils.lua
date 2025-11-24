@@ -10,11 +10,12 @@ end
 
 ---@param action "read"|"delete"
 M.read_or_delete = function(action)
-  vim.ui.select(vim.tbl_keys(MiniSessions.detected), {
-    prompt = action:gsub("^%l", string.upper) .. " session",
+  local ms = require('mini.sessions')
+
+  vim.ui.select(vim.tbl_keys(ms.detected), {
     format_item = M.highlight_current,
   }, function(session)
-    if session then MiniSessions[action](session) end
+    if session then ms[action](session) end
   end)
 end
 
@@ -25,7 +26,7 @@ M.get_session_name = function()
 
   if vim.v.shell_error == 0 then
     local branch_normalized = string.gsub(branch, "/", "󰿟")
-    return name_normalized .. " @ " .. vim.trim(branch_normalized --[[@as string]])
+    return name_normalized .. " @ " .. vim.trim(branch_normalized)
   else
     return name_normalized
   end
