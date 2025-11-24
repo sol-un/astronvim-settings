@@ -18,7 +18,6 @@ return {
   -- Motion
   { import = "astrocommunity.motion.flash-nvim" },
   { import = "astrocommunity.motion.mini-surround" },
-  { import = "astrocommunity.motion.mini-ai" },
   { import = "astrocommunity.motion.marks-nvim" },
 
   -- Utils
