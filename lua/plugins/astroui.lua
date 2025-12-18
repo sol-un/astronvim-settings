@@ -8,7 +8,7 @@ return {
   { "akinsho/toggleterm.nvim", enabled = false },
   {
     "folke/which-key.nvim",
-    opts = { preset = "helix" },
+    opts = { preset = "helix", show_help = false },
   },
   {
     "AstroNvim/astroui",

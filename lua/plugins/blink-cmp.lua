@@ -16,8 +16,8 @@ return {
       },
     },
     sources = {
-      -- Autocomplete from visible buffers in codecompanion chat
-      per_filetype = { codecompanion = { inherit_defaults = true } },
+      -- "path" source in opencode input window interferes with slash commands. Dropping it and snippets
+      per_filetype = { opencode = { "buffer", "lsp" } },
     },
   },
 }

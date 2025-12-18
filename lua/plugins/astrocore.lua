@@ -43,6 +43,7 @@ return {
       o = {
         shell = vim.uv.os_uname().sysname == "Windows_NT" and "powershell" or vim.o.shell,
         sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,terminal",
+        winborder = "rounded",
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
