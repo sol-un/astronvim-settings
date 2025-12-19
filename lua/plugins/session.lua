@@ -9,6 +9,11 @@ return {
       rooter = {
         enabled = false,
       },
+      mappings = {
+        n = {
+          ["<Leader>S"] = { desc = " Session" },
+        },
+      },
     },
   },
   { "notjedi/nvim-rooter.lua", lazy = false, opts = {} },
@@ -26,7 +31,6 @@ return {
       },
     },
     keys = {
-      { "<Leader>S" },
       {
         "<Leader>Sl",
         function()
